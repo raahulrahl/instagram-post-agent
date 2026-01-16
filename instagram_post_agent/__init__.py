@@ -7,8 +7,7 @@
 #
 #  Thank you users! We ❤️ you! - 🌻
 
-"""instagram-post-agent - A Bindu Agent.
-"""
+"""instagram-post-agent - A Bindu Agent."""
 
 from instagram_post_agent.__version__ import __version__
 from instagram_post_agent.main import (

@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
 
 from instagram_post_agent.main import handler
 
@@ -31,15 +32,20 @@ A person carrying eco bags in a sunny park...
     with (
         patch("instagram_post_agent.main._initialized", True),
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
-        patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Photograph descriptions"),
-        patch("instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
-            "product_name": "Eco Bags",
-            "target_audience": "Environmentally conscious consumers",
-            "campaign_tone": "Inspirational",
-            "key_message": "Sustainable fashion",
-            "call_to_action": "Shop now",
-            "hashtags": "#ecofriendly #sustainable"
-        }),
+        patch(
+            "instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Photograph descriptions"
+        ),
+        patch(
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
+                "product_name": "Eco Bags",
+                "target_audience": "Environmentally conscious consumers",
+                "campaign_tone": "Inspirational",
+                "key_message": "Sustainable fashion",
+                "call_to_action": "Shop now",
+                "hashtags": "#ecofriendly #sustainable",
+            },
+        ),
     ):
         result = await handler(messages)
 
@@ -74,16 +80,19 @@ Photograph 1: Fit person exercising at sunrise...
     with (
         patch("instagram_post_agent.main._initialized", True),
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
-        patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Photograph descriptions"),
         patch(
-            "instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
+            "instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Photograph descriptions"
+        ),
+        patch(
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
                 "product_name": "Fitness App",
                 "target_audience": "Fitness enthusiasts",
                 "campaign_tone": "Motivational",
                 "key_message": "AI-powered workouts",
                 "call_to_action": "Download now",
-                "hashtags": "#fitness #workout"
-            }
+                "hashtags": "#fitness #workout",
+            },
         ),
     ):
         result = await handler(messages)
@@ -106,14 +115,17 @@ async def test_handler_initialization():
         patch("instagram_post_agent.main.initialize_crew", new_callable=AsyncMock) as mock_init,
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
         patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Image descriptions"),
-        patch("instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
-            "product_name": "Product",
-            "target_audience": "General",
-            "campaign_tone": "Professional",
-            "key_message": "Features",
-            "call_to_action": "Learn more",
-            "hashtags": "#product"
-        }),
+        patch(
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
+                "product_name": "Product",
+                "target_audience": "General",
+                "campaign_tone": "Professional",
+                "key_message": "Features",
+                "call_to_action": "Learn more",
+                "hashtags": "#product",
+            },
+        ),
         patch("instagram_post_agent.main._init_lock", new_callable=MagicMock()) as mock_lock,
     ):
         # Configure the lock to work as an async context manager
@@ -144,14 +156,17 @@ async def test_handler_race_condition_prevention():
         patch("instagram_post_agent.main.initialize_crew", new_callable=AsyncMock) as mock_init,
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
         patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Test images"),
-        patch("instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
-            "product_name": "Test",
-            "target_audience": "Test",
-            "campaign_tone": "Test",
-            "key_message": "Test",
-            "call_to_action": "Test",
-            "hashtags": "#test"
-        }),
+        patch(
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
+                "product_name": "Test",
+                "target_audience": "Test",
+                "campaign_tone": "Test",
+                "key_message": "Test",
+                "call_to_action": "Test",
+                "hashtags": "#test",
+            },
+        ),
         patch("instagram_post_agent.main._init_lock", new_callable=MagicMock()) as mock_lock,
     ):
         # Configure the lock to work as an async context manager
@@ -172,7 +187,10 @@ async def test_handler_race_condition_prevention():
 async def test_handler_with_detailed_instagram_query():
     """Test that handler can process detailed Instagram marketing queries."""
     messages = [
-        {"role": "user", "content": "Create luxury Instagram campaign for skincare line at https://luxuryskincare.com, target women 30-50"}
+        {
+            "role": "user",
+            "content": "Create luxury Instagram campaign for skincare line at https://luxuryskincare.com, target women 30-50",
+        }
     ]
 
     mock_response = """**Instagram Marketing Content**
@@ -196,14 +214,15 @@ Photograph 1: Elegant skincare products in spa setting...
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
         patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Luxury photo concepts"),
         patch(
-            "instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
                 "product_name": "Luxury Skincare",
                 "target_audience": "Women 30-50",
                 "campaign_tone": "Luxurious",
                 "key_message": "Premium ingredients",
                 "call_to_action": "Discover luxury",
-                "hashtags": "#luxury #skincare"
-            }
+                "hashtags": "#luxury #skincare",
+            },
         ),
     ):
         result = await handler(messages)
@@ -239,14 +258,17 @@ async def test_handler_crew_exception():
     with (
         patch("instagram_post_agent.main._initialized", True),
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock) as mock_run,
-        patch("instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
-            "product_name": "Product",
-            "target_audience": "General",
-            "campaign_tone": "Professional",
-            "key_message": "Features",
-            "call_to_action": "Learn more",
-            "hashtags": "#product"
-        }),
+        patch(
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
+                "product_name": "Product",
+                "target_audience": "General",
+                "campaign_tone": "Professional",
+                "key_message": "Features",
+                "call_to_action": "Learn more",
+                "hashtags": "#product",
+            },
+        ),
     ):
         # Make run_copy_crew raise an exception
         mock_run.side_effect = Exception("Crew execution failed")
@@ -296,14 +318,15 @@ async def test_handler_with_url_extraction():
         patch("instagram_post_agent.main.run_copy_crew", new_callable=AsyncMock, return_value=mock_response),
         patch("instagram_post_agent.main.run_image_crew", new_callable=AsyncMock, return_value="Image concepts"),
         patch(
-            "instagram_post_agent.main.extract_marketing_parameters_with_llm", return_value={
+            "instagram_post_agent.main.extract_marketing_parameters_with_llm",
+            return_value={
                 "product_name": "Test Product",
                 "target_audience": "General",
                 "campaign_tone": "Professional",
                 "key_message": "Features",
                 "call_to_action": "Learn more",
-                "hashtags": "#test"
-            }
+                "hashtags": "#test",
+            },
         ),
     ):
         result = await handler(messages)
