@@ -2,31 +2,36 @@
   <img src="https://raw.githubusercontent.com/getbindu/create-bindu-agent/refs/heads/main/assets/light.svg" alt="bindu Logo" width="200">
 </p>
 
-<h1 align="center">instagram-post-agent</h1>
+<h1 align="center">Instagram Post Agent</h1>
+<h3 align="center">AI-Powered Instagram Marketing Content Generator</h3>
 
 <p align="center">
-  <strong>AI Crew for Instagram is a multi-agent AI system that collaborates to ideate, write, design, and optimize Instagram posts—handling captions, hashtags, visuals, and posting strategy to maximize reach, engagement, and brand consistency. 🚀</strong>
+  <strong>An intelligent multi-agent system that creates complete Instagram marketing campaigns—analyzing products, researching competitors, generating ad copy, and designing visual concepts—all in one seamless workflow.</strong>
 </p>
 
 <p align="center">
   <a href="https://github.com/Paraschamoli/instagram-post-agent/actions/workflows/main.yml?query=branch%3Amain">
-    <img src="https://img.shields.io/github/actions/workflow/status/Paraschamoli/instagram-post-agent/main.yml?branch=main" alt="Build status">
+    <img src="https://img.shields.io/github/actions/workflow/status/Paraschamoli/instagram-post-agent/main.yml?branch=main" alt="Build Status">
   </a>
-  <a href="https://img.shields.io/github/license/Paraschamoli/instagram-post-agent">
+  <a href="https://github.com/Paraschamoli/instagram-post-agent/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/Paraschamoli/instagram-post-agent" alt="License">
   </a>
+  <img src="https://img.shields.io/badge/python-3.12+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/framework-bindu-purple" alt="Built with Bindu">
 </p>
 
 ---
 
 ## 📖 Overview
 
-AI Crew for Instagram is a multi-agent AI system that collaborates to ideate, write, design, and optimize Instagram posts—handling captions, hashtags, visuals, and posting strategy to maximize reach, engagement, and brand consistency. 🚀. Built on the [Bindu Agent Framework](https://github.com/getbindu/bindu) for the Internet of Agents.
+The **Instagram Post Agent** transforms product websites and marketing briefs into complete Instagram campaigns. Using a sophisticated multi-agent **CrewAI** system, it performs market analysis, generates compelling ad copy, and creates detailed visual concepts—all tailored to your brand and target audience.
 
 **Key Capabilities:**
-- 🔍 [Add your key capabilities here]
-- ✅ [Add another capability]
-- 🚨 [Add another capability]
+- 🔍 **Market Intelligence**: Analyzes websites and competitors to understand positioning
+- ✍️ **Creative Copywriting**: Generates multiple ad copy options with hashtags and CTAs
+- 🎨 **Visual Concept Design**: Creates detailed photograph descriptions for visual content
+- 🎯 **Audience Targeting**: Adapts content tone and style to specific demographics
+- ⚡ **Multi-Agent Collaboration**: 5 specialized AI agents work in sequence for optimal results
 
 ---
 
@@ -34,9 +39,9 @@ AI Crew for Instagram is a multi-agent AI system that collaborates to ideate, wr
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.12+
 - [uv](https://github.com/astral-sh/uv) package manager
-- API keys for OpenRouter and Mem0 (both have free tiers)
+- API keys for required services (all have free tiers available)
 
 ### Installation
 
@@ -46,7 +51,7 @@ git clone https://github.com/Paraschamoli/instagram-post-agent.git
 cd instagram-post-agent
 
 # Create virtual environment
-uv venv --python 3.12.9
+uv venv --python 3.12
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
@@ -57,13 +62,15 @@ cp .env.example .env
 ```
 
 ### Configuration
-
 Edit `.env` and add your API keys:
 
-| Key | Get It From | Required |
-|-----|-------------|----------|
-| `OPENROUTER_API_KEY` | [OpenRouter](https://openrouter.ai/keys) | ✅ Yes |
-| `MEM0_API_KEY` | [Mem0 Dashboard](https://app.mem0.ai/dashboard/api-keys) | If you want to use Mem0 tools |
+| Key | Description | Required | Get From |
+| --- | --- | --- | --- |
+| `OPENROUTER_API_KEY` | For LLM calls (GPT-4o recommended) | ✅ Yes | OpenRouter |
+| `SERPER_API_KEY` | For search functionality | ✅ Yes | Serper.dev |
+| `BROWSERLESS_API_KEY` | For web scraping | ✅ Yes | Browserless.io |
+| `MEM0_API_KEY` | For memory features | Optional | Mem0.ai |
+| `OPENAI_API_KEY` | Alternative to OpenRouter | Optional | OpenAI |
 
 ### Run the Agent
 
@@ -74,18 +81,6 @@ uv run python -m instagram_post_agent
 # Agent will be available at http://localhost:3773
 ```
 
-### Github Setup
-
-```bash
-# Initialize git repository and commit your code
-git init -b main
-git add .
-git commit -m "Initial commit"
-
-# Create repository on GitHub and push (replace with your GitHub username)
-gh repo create Paraschamoli/instagram-post-agent --public --source=. --remote=origin --push
-```
-
 ---
 
 ## 💡 Usage
@@ -93,82 +88,109 @@ gh repo create Paraschamoli/instagram-post-agent --public --source=. --remote=or
 ### Example Queries
 
 ```bash
-# Example query 1
-"[Add example query here]"
+# Basic product marketing
+"Create Instagram content for https://ecobags.com sustainable tote bags"
 
-# Example query 2
-"[Add another example]"
+# Detailed campaign with target audience
+"Generate Instagram ads for fitness app at https://fitapp.com, target fitness enthusiasts 25-40"
+
+# Luxury brand campaign
+"Create luxury Instagram campaign for skincare line at https://luxuryskincare.com, target women 30-50"
 ```
 
-### Input Formats
-
-**Plain Text:**
-```
-[Describe expected input format]
-```
-
-**JSON:**
-```json
-{
-  "content": "[example content]",
-  "focus": "[example focus]"
-}
-```
+### How It Works
+1. **Ingestion**: The agent receives your product website and details.
+2. **Analysis**: Specialized agents analyze the website and competitors.
+3. **Strategy**: Marketing strategist develops campaign approach.
+4. **Copy Creation**: Content creator generates multiple ad copy options.
+5. **Visual Design**: Photographer and creative director create visual concepts.
+6. **Compilation**: All elements are combined into a complete marketing package.
 
 ### Output Structure
 
-The agent returns structured output with:
-- **[Output Component 1]**: Description
-- **[Output Component 2]**: Description
-- **[Output Component 3]**: Description
+```text
+**Instagram Marketing Content**
+
+**Ad Copy Options:**
+Option 1: [Engaging ad copy with hashtags and CTA]
+Option 2: [Alternative approach]
+Option 3: [Creative variation]
+
+**Photograph Descriptions:**
+Photograph 1: [Detailed visual concept description]
+Photograph 2: [Alternative visual approach]
+Photograph 3: [Creative visual concept]
+
+**Marketing Parameters:**
+- Product: [Product name]
+- Target Audience: [Audience description]
+- Campaign Tone: [Tone/voice]
+- Key Message: [Core message]
+- Call to Action: [CTA]
+- Hashtags: [Relevant hashtags]
+```
 
 ---
 
 ## 🔌 API Usage
 
-The agent exposes a RESTful API when running. Default endpoint: `http://localhost:3773` 
+The agent exposes a RESTful API compatible with the Bindu protocol.
 
-### Quick Start
+### Send Message Endpoint
+`POST http://localhost:3773/chat`
 
-For complete API documentation, request/response formats, and examples, visit:
+**Request:**
 
-📚 **[Bindu API Reference - Send Message to Agent](https://docs.getbindu.com/api-reference/all-the-tasks/send-message-to-agent)**
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Create Instagram content for https://example.com eco-friendly product"
+    }
+  ]
+}
+```
 
+**Response:**
 
-### Additional Resources
+```json
+{
+  "response": "**Instagram Marketing Content**\n\n**Ad Copy Options:**\nOption 1: Discover sustainable living..."
+}
+```
 
-- 📖 [Full API Documentation](https://docs.getbindu.com/api-reference/all-the-tasks/send-message-to-agent)
-- 📦 [Postman Collections](https://github.com/GetBindu/Bindu/tree/main/postman/collections)
-- 🔧 [API Reference](https://docs.getbindu.com)
+For complete API documentation, visit:
+[📚 Bindu API Reference](https://docs.getbindu.com)
 
 ---
 
 ## 🎯 Skills
 
-### instagram_post_agent (v1.0.0)
+**instagram-post (v1.0.0)**
 
 **Primary Capability:**
-- [Describe what this skill does]
-- [Add key features]
+Generating complete Instagram marketing campaigns from product information.
 
 **Features:**
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+*   Website analysis and competitor research
+*   Multi-option ad copy generation
+*   Visual concept design with detailed descriptions
+*   Hashtag recommendation and call-to-action optimization
+*   Target audience analysis and tone adaptation
 
 **Best Used For:**
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
+*   Product launches and marketing campaigns
+*   Social media content creation
+*   Brand awareness campaigns
+*   Visual content planning
+*   Competitor analysis and positioning
 
 **Not Suitable For:**
-- [Anti-pattern 1]
-- [Anti-pattern 2]
-
-**Performance:**
-- Average processing time: ~[X] seconds
-- Max concurrent requests: [N]
-- Memory per request: [X]MB
+*   Actual image generation (use DALL-E/Midjourney)
+*   Video content creation
+*   Real-time social media posting
+*   Analytics and performance tracking
 
 ---
 
@@ -184,53 +206,41 @@ docker-compose up --build
 ```
 
 ### Docker Configuration
+Ensure your `.env` file is populated before building. The Docker container maps port 3773 by default.
 
-The agent runs on port `3773` and requires:
-- `OPENROUTER_API_KEY` environment variable
-- `MEM0_API_KEY` environment variable
-
-Configure these in your `.env` file before running.
-
-### Production Deployment
-
-```bash
-# Use production compose file
-docker-compose -f docker-compose.prod.yml up -d
+```yaml
+version: '3.8'
+services:
+  agent:
+    build: .
+    ports:
+      - "3773:3773"
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - SERPER_API_KEY=${SERPER_API_KEY}
+      - BROWSERLESS_API_KEY=${BROWSERLESS_API_KEY}
 ```
 
 ---
 
 ## 🌐 Deploy to bindus.directory
 
-Make your agent discoverable worldwide and enable agent-to-agent collaboration.
+Make your agent discoverable worldwide on the Internet of Agents.
 
 ### Setup GitHub Secrets
+Go to your repo **Settings > Secrets and variables > Actions**.
 
-```bash
-# Authenticate with GitHub
-gh auth login
-
-# Set deployment secrets
-gh secret set BINDU_API_TOKEN --body "<your-bindu-api-key>"
-gh secret set DOCKERHUB_TOKEN --body "<your-dockerhub-token>"
-```
-
-Get your keys:
-- **Bindu API Key**: [bindus.directory](https://bindus.directory) dashboard
-- **Docker Hub Token**: [Docker Hub Security Settings](https://hub.docker.com/settings/security)
+Add the following secrets:
+*   `BINDU_API_TOKEN`: Your API key from bindus.directory.
+*   `DOCKERHUB_TOKEN`: Your Docker Hub access token.
+*   `DOCKERHUB_USERNAME`: Your Docker Hub username.
 
 ### Deploy
 
 ```bash
-# Push to trigger automatic deployment
+# Push to main to trigger automatic deployment
 git push origin main
 ```
-
-GitHub Actions will automatically:
-1. Build your agent
-2. Create Docker container
-3. Push to Docker Hub
-4. Register on bindus.directory
 
 ---
 
@@ -238,63 +248,39 @@ GitHub Actions will automatically:
 
 ### Project Structure
 
-```
+```text
 instagram-post-agent/
 ├── instagram_post_agent/
-│   ├── skills/
-│   │   └── instagram_post_agent/
-│   │       ├── skill.yaml          # Skill configuration
-│   │       └── __init__.py
-│   ├── __init__.py
-│   ├── __main__.py
-│   ├── main.py                     # Agent entry point
-│   └── agent_config.json           # Agent configuration
+│   ├── main.py                     # 🧠 Core logic (CrewAI orchestration)
+│   ├── skills/                     # Bindu skill definitions
+│   └── agent_config.json           # Agent metadata
 ├── tests/
-│   └── test_main.py
-├── .env.example
-├── docker-compose.yml
-├── Dockerfile.agent
-└── pyproject.toml
+│   └── test_main.py                # Pytest suite
+├── .env.example                    # Env var template
+├── pyproject.toml                  # Dependencies (uv)
+└── Dockerfile                      # Production build definition
 ```
 
 ### Running Tests
 
 ```bash
-make test              # Run all tests
-make test-cov          # With coverage report
-```
+# Run unit tests
+uv run pytest
 
-### Code Quality
-
-```bash
-make format            # Format code with ruff
-make lint              # Run linters
-make check             # Format + lint + test
-```
-
-### Pre-commit Hooks
-
-```bash
-# Install pre-commit hooks
-uv run pre-commit install
-
-# Run manually
-uv run pre-commit run -a
+# Run with coverage
+uv run pytest --cov=instagram_post_agent tests/
 ```
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Whether it's adding new marketing templates, improving the agent prompts, or enhancing the visual concept generation.
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature` 
-3. Commit your changes: `git commit -m 'Add amazing feature'` 
-4. Push to the branch: `git push origin feature/amazing-feature` 
-5. Open a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+1.  Fork the repo.
+2.  Create a branch: `git checkout -b feature/visual-enhancements`
+3.  Commit changes.
+4.  Open a Pull Request.
 
 ---
 
@@ -306,40 +292,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Powered by Bindu
 
-Built with the [Bindu Agent Framework](https://github.com/getbindu/bindu)
+Built with the **Bindu Agent Framework**.
 
 **Why Bindu?**
-- 🌐 **Internet of Agents**: A2A, AP2, X402 protocols for agent collaboration
-- ⚡ **Zero-config setup**: From idea to production in minutes
-- 🛠️ **Production-ready**: Built-in deployment, monitoring, and scaling
-
-**Build Your Own Agent:**
-```bash
-uvx cookiecutter https://github.com/getbindu/create-bindu-agent.git
-```
-
----
-
-## 📚 Resources
-
-- 📖 [Full Documentation](https://Paraschamoli.github.io/instagram-post-agent/)
-- 💻 [GitHub Repository](https://github.com/Paraschamoli/instagram-post-agent/)
-- 🐛 [Report Issues](https://github.com/Paraschamoli/instagram-post-agent/issues)
-- 💬 [Join Discord](https://discord.gg/3w5zuYUuwt)
-- 🌐 [Agent Directory](https://bindus.directory)
-- 📚 [Bindu Documentation](https://docs.getbindu.com)
-
----
+*   ⚡ **Zero-config setup**: Focus on logic, not infrastructure.
+*   🛠️ **Production-ready**: Built-in HTTP server, protocol handling, and dockerization.
+*   🌐 **Interoperable**: Ready for the Internet of Agents.
 
 <p align="center">
-  <strong>Built with 💛 by the team from Amsterdam 🌷</strong>
+  <strong>Built with ❤️ by Paras Chamoli</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Paraschamoli/instagram-post-agent">⭐ Star this repo</a> •
+  <a href="https://github.com/Paraschamoli/instagram-post-agent/stargazers">⭐ Star this repo</a> •
   <a href="https://discord.gg/3w5zuYUuwt">💬 Join Discord</a> •
   <a href="https://bindus.directory">🌐 Agent Directory</a>
 </p>
-
-#   i n s t a g r a m - p o s t - a g e n t  
- 

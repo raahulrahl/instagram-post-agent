@@ -1,0 +1,65 @@
+{
+    "author": "paras25619@gmail.com",
+    "name": "instagram-post-agent",
+    "description": "AI Crew for Instagram is a multi-agent AI system that collaborates to ideate, write, design, and optimize Instagram posts—handling captions, hashtags, visuals, and posting strategy to maximize reach, engagement, and brand consistency. 🚀",
+    "version": "1.0.0",
+    "recreate_keys": false,
+    
+    "skills": [
+        "skills/instagram-post"
+    ],
+    
+    "capabilities": {},
+    
+    "agent_trust": "low",
+    "debug_mode": true,
+    "debug_level": 2,
+    
+    "deployment": {
+        "url": "http://0.0.0.0:3773",
+        "expose": true,
+        "protocol_version": "1.0.0",
+        "proxy_urls": ["0.0.0.0"],
+        "cors_origins": ["*"]
+    },
+    "storage": {
+        "type": "memory"
+    },
+    "scheduler": {
+        "type": "memory"
+    },
+    
+    "num_history_sessions": 5,
+    "environment_variables": [
+        {
+            "key": "OPENROUTER_API_KEY",
+            "description": "OpenRouter API key for LLM calls",
+            "required": true
+        },
+        {
+            "key": "MEM0_API_KEY",
+            "description": "Mem0 API key for memory operations",
+            "required": true
+        },
+        {
+            "key": "SERPER_API_KEY",
+            "description": "Serper API key for search functionality",
+            "required": true
+        },
+        {
+            "key": "BROWSERLESS_API_KEY",
+            "description": "Browserless API key for web scraping",
+            "required": true
+        },
+        {
+            "key": "OPENAI_API_KEY",
+            "description": "OpenAI API key for LLM calls (alternative to OpenRouter)",
+            "required": false
+        },
+        {
+            "key": "MODEL_NAME",
+            "description": "Model name override (default: openai/gpt-4o)",
+            "required": false
+        }
+    ]
+}
