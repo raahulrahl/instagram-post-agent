@@ -5,10 +5,10 @@ author: paras25619@gmail.com
 
 # Description
 description: |
-  An AI-powered Instagram marketing assistant that creates complete social media campaigns.
-  This skill analyzes products, researches competitors, generates engaging ad copy,
-  and designs visual concepts for Instagram posts. Using a multi-agent CrewAI system,
-  it handles everything from market analysis to creative content creation.
+  Creates structured Instagram marketing campaigns by analyzing products,
+  researching competitors, generating optimized ad copy, designing visual concepts,
+  and providing strategic recommendations. Produces multiple content variants
+  with audience targeting and engagement optimization guidance.
 
 # Tags and Modes
 tags:
@@ -17,15 +17,9 @@ tags:
   - marketing
   - content-creation
   - ad-copy
-  - photography
   - branding
-  - digital-marketing
-  - social-media-marketing
-  - content-strategy
-  - visual-content
-  - creative-writing
   - competitor-analysis
-  - market-research
+  - campaign-strategy
 
 input_modes:
   - text/plain
@@ -39,54 +33,35 @@ output_modes:
 # Example Queries
 examples:
   - "Create Instagram content for https://example.com eco-friendly bags"
-  - "Generate ad copy and images for our new fitness app launch"
-  - "Plan Instagram campaign for luxury skincare product line"
-  - "Create social media content for tech startup website"
-  - "Design Instagram post for sustainable fashion brand"
+  - "Generate ad copy and visual concepts for our fitness app"
+  - "Plan Instagram campaign for luxury skincare brand"
+  - "Design Instagram post for sustainable fashion startup"
 
 # Detailed Capabilities
 capabilities_detail:
-  market_analysis:
+  primary_capability:
     supported: true
-    description: "Analyze products and competitors for market positioning"
+    description: "Generates structured Instagram marketing content packages"
     features:
-      - "Website content analysis"
-      - "Competitor research and comparison"
-      - "Unique selling point identification"
-      - "Market positioning insights"
-    limitations: "Requires accessible website content; limited to public information"
+      - "Analyzes product websites and descriptions"
+      - "Identifies unique selling points"
+      - "Performs competitor positioning research"
+      - "Generates 3 ad copy variants"
+      - "Provides hashtag strategies"
+      - "Creates 3 visual concept descriptions"
+      - "Optimizes calls-to-action"
+      - "Defines target audience segments"
+    limitations: "Requires accessible product information; does not generate actual images or post to Instagram"
 
-  content_creation:
+  secondary_capability:
     supported: true
-    description: "Generate engaging Instagram ad copy and captions"
+    description: "Provides campaign strategy insights and engagement recommendations"
     features:
-      - "Multiple ad copy options (3 variants)"
-      - "Hashtag recommendations"
-      - "Call-to-action optimization"
-      - "Tone and voice customization"
-      - "Audience targeting"
-    limitations: "May require human review for brand voice alignment"
-
-  visual_concept_design:
-    supported: true
-    description: "Create detailed photographic concepts for Instagram posts"
-    features:
-      - "Photograph description generation"
-      - "Visual style recommendations"
-      - "Composition and lighting suggestions"
-      - "Multiple concept options"
-      - "Midjourney/DALL-E prompt compatible"
-    limitations: "Generates descriptions only, not actual images"
-
-  campaign_strategy:
-    supported: true
-    description: "Develop comprehensive Instagram marketing strategies"
-    features:
-      - "Target audience analysis"
-      - "Content calendar suggestions"
-      - "Engagement optimization tips"
-      - "Performance metric guidance"
-    limitations: "Strategy based on available information only"
+      - "Recommends content positioning"
+      - "Suggests engagement tactics"
+      - "Provides performance metric guidance"
+      - "Offers content calendar suggestions"
+      - "Delivers brand tone alignment guidance"
 
 # Requirements
 requirements:
@@ -100,20 +75,15 @@ requirements:
     - "unstructured>=0.15.12"
     - "beautifulsoup4>=4.12.3"
     - "python-dotenv>=1.0.1"
-  system: []
+  system:
+    - "Internet access for website analysis and competitor research"
   min_memory_mb: 512
-  external_services:
-    - "OpenRouter API (or OpenAI API)"
-    - "Serper API for search"
-    - "Browserless API for web scraping"
 
 # Performance Metrics
 performance:
   avg_processing_time_ms: 15000
   max_concurrent_requests: 3
   memory_per_request_mb: 512
-  timeout_seconds: 180
-  max_input_length_chars: 5000
   scalability: vertical
 
 # Tool Restrictions
@@ -130,229 +100,186 @@ allowed_tools:
 # Rich Documentation
 documentation:
   overview: |
-    This skill provides complete Instagram marketing content creation through a multi-agent AI system.
-    It employs specialized agents working in sequence to analyze products, research markets,
-    generate compelling ad copy, and design visual concepts. The system is designed for
-    marketers, business owners, and content creators who need professional-quality
-    Instagram content without extensive manual effort.
+    This skill generates complete Instagram marketing content packages.
+    It analyzes product information, researches positioning, creates multiple
+    ad copy variants, designs visual concepts, and provides campaign strategy
+    guidance. The system is structured for marketers and business owners
+    who require professional Instagram-ready content without manual research.
 
   use_cases:
     when_to_use:
-      - "Launching new products on Instagram"
-      - "Creating consistent brand content"
-      - "Generating ad copy for marketing campaigns"
-      - "Designing visual concepts for social media"
-      - "Competitor analysis and market positioning"
-      - "Content strategy development"
-      - "Small business social media management"
+      - "Launching a new product on Instagram"
+      - "Creating multiple ad copy variations"
+      - "Developing brand positioning for social media"
+      - "Designing visual concepts for Instagram posts"
+      - "Generating hashtag strategies"
+      - "Planning engagement-focused campaigns"
 
     when_not_to_use:
-      - "Actual image generation (use DALL-E/Midjourney)"
-      - "Real-time social media posting"
-      - "Analytics and performance tracking"
-      - "Community management and engagement"
-      - "Paid ad campaign management"
-      - "Video content creation"
+      - "Actual image generation"
+      - "Video production or editing"
+      - "Posting content directly to Instagram"
+      - "Managing community engagement"
+      - "Running paid ad campaigns"
+      - "Email marketing"
 
   input_structure: |
-    Accepts natural language requests with product information:
+    Accepts product information in plain text or JSON format.
 
-    Text format:
-    "Create Instagram content for [website URL] [additional details]"
+    Example (Plain Text):
+    "Create Instagram content for https://example.com eco-friendly bags"
 
-    JSON format:
+    Example (JSON):
     {
       "query": "Instagram content request",
       "product_website": "https://example.com",
-      "product_details": "Additional information about the product",
-      "target_audience": "Optional: Specific audience demographics",
-      "campaign_goal": "Optional: Awareness, sales, engagement, etc."
+      "product_details": "Key features and differentiators",
+      "target_audience": "Optional demographic",
+      "campaign_goal": "Awareness, engagement, or sales"
     }
 
     Constraints:
-    - Product website must be accessible
-    - Maximum input length: 5000 characters
-    - Must include at least a website URL or product name
-    - Supported languages: English primary
+    - Must include product name or website
+    - Maximum 5000 characters
+    - Content should be in English
 
   output_format: |
-    Comprehensive Instagram Marketing Package:
+    Returns structured Instagram marketing package.
 
-    {
-      "success": true,
-      "content_package": {
-        "ad_copy": {
-          "options": [
-            {
-              "title": "Option 1",
-              "copy": "Engaging ad copy text...",
-              "hashtags": "#example #hashtags",
-              "call_to_action": "Learn more →"
-            }
-          ]
-        },
-        "visual_concepts": {
-          "options": [
-            {
-              "title": "Concept 1",
-              "description": "Detailed photograph description...",
-              "style": "Lifestyle, bright, professional",
-              "composition": "Wide shot, natural lighting"
-            }
-          ]
-        },
-        "marketing_insights": {
-          "product_analysis": "Key selling points...",
-          "target_audience": "Primary demographic...",
-          "recommended_strategy": "Content approach..."
-        }
-      },
-      "metadata": {
-        "processing_time_ms": 12000,
-        "agents_used": 5,
-        "tasks_completed": 6
-      }
-    }
+    Output Structure:
+    - MARKET ANALYSIS:
+      - PRODUCT SUMMARY
+      - UNIQUE SELLING POINTS
+      - COMPETITOR POSITIONING
+    - AD COPY OPTIONS (3):
+      - TITLE
+      - COPY
+      - HASHTAGS
+      - CALL TO ACTION
+    - VISUAL CONCEPT OPTIONS (3):
+      - TITLE
+      - DESCRIPTION
+      - STYLE
+      - COMPOSITION
+    - CAMPAIGN STRATEGY:
+      - PRIMARY OBJECTIVE
+      - TARGET AUDIENCE
+      - ENGAGEMENT RECOMMENDATIONS
+      - METRICS TO TRACK
+    - METADATA:
+      - PROCESSING TIME
+      - AGENTS USED
+      - TASKS COMPLETED
 
   error_handling:
-    - "Website inaccessible: Returns error with troubleshooting suggestions"
-    - "No product information: Prompts for more details"
-    - "API rate limits: Queues requests or suggests simpler queries"
-    - "Content generation failure: Provides partial results with completion percentage"
-    - "Invalid input format: Provides guidance on acceptable formats"
-    - "Timeout: Returns progress snapshot and estimated completion time"
+    - "Missing product information: Requests website or product name"
+    - "Website inaccessible: Returns error with retry suggestion"
+    - "Input too long: Requests input under 5000 characters"
+    - "API timeout: Retries up to 3 times"
+    - "Insufficient data: Generates partial output with noted limitations"
 
   examples:
-    - title: "Eco-Friendly Product Launch"
+    - title: "Eco Product Campaign"
       input:
-        query: "Create Instagram content for https://ecobags.com sustainable tote bags"
-        product_details: "Made from recycled materials, waterproof, multiple colors"
+        query: "Create Instagram content for https://ecobags.com"
       output:
-        success: true
-        content_package:
-          ad_copy:
-            options: [3 engaging copy options]
-          visual_concepts:
-            options: [3 photograph descriptions]
-        metadata:
-          processing_time_ms: 14500
-          agents_used: 5
+        market_analysis: "Identified eco-conscious positioning"
+        ad_variants_generated: 3
+        visual_concepts_generated: 3
+        processing_time_ms: 14000
 
-    - title: "Tech App Promotion"
+    - title: "Fitness App Launch"
       input:
-        query: "Generate Instagram ads for fitness tracking app at https://fitapp.com"
-        product_details: "AI-powered workouts, progress tracking, community features"
+        query: "Generate Instagram ads for fitness tracking app"
         target_audience: "Fitness enthusiasts 25-40"
       output:
-        success: true
-        content_package:
-          ad_copy:
-            options: [3 fitness-focused copy options]
-          visual_concepts:
-            options: [3 active lifestyle photo concepts]
-        metadata:
-          processing_time_ms: 16000
-          agents_used: 5
+        ad_variants_generated: 3
+        engagement_strategy_provided: true
+        processing_time_ms: 16000
 
   best_practices:
     for_developers:
-      - "Provide clear website URLs for accurate analysis"
-      - "Include specific product features for better copy generation"
-      - "Specify target audience for tailored content"
-      - "Use the marketing insights to refine strategies"
-      - "Combine with image generation tools for complete workflow"
+      - "Provide detailed product features for stronger ad copy"
+      - "Specify target audience when possible"
+      - "Use JSON format for structured requests"
+      - "Allow up to 15 seconds processing time"
 
     for_orchestrators:
-      - "Route Instagram marketing requests to this skill"
-      - "Chain with image generation agents for visual assets"
-      - "Combine with scheduling agents for content planning"
-      - "Use with analytics agents for performance tracking"
-      - "Consider input complexity when setting timeout values"
+      - "Route Instagram marketing and campaign creation requests here"
+      - "Do not route image rendering or video generation requests"
+      - "Consider 180-second timeout"
+      - "Limit to 3 concurrent requests"
 
   installation: |
+    Installation instructions for the instagram-post agent.
+
     Required packages:
     pip install crewai crewai-tools langchain langchain-openai openai requests unstructured beautifulsoup4 python-dotenv
 
-    Environment variables:
-    OPENROUTER_API_KEY=your_openrouter_api_key
-    SERPER_API_KEY=your_serper_api_key
-    BROWSERLESS_API_KEY=your_browserless_api_key
-    MEM0_API_KEY=your_mem0_api_key  # Optional
-    MODEL_NAME=openai/gpt-4o  # Optional, default
+    Environment variables required:
+    - OPENROUTER_API_KEY
+    - SERPER_API_KEY
+    - BROWSERLESS_API_KEY
 
-    For web scraping capabilities:
-    # No additional system dependencies required
-    # Uses Browserless service for JavaScript-rendered content
+    Quick start:
+    1. Install dependencies
+    2. Configure environment variables
+    3. Run the agent service
+    4. Send structured marketing requests via API
 
   versioning:
     - version: "1.0.0"
       date: "2026-01-15"
-      changes: "Initial release with 5-agent crew for complete Instagram content creation"
+      changes: "Initial release with structured Instagram campaign generation"
     - version: "1.1.0"
       status: "planned"
-      changes: "Add video concept generation and Reels content"
+      changes: "Add Reels concept generation"
     - version: "1.2.0"
       status: "planned"
-      changes: "Integration with social media scheduling APIs"
+      changes: "Add scheduling integration support"
 
 # Assessment fields for skill negotiation
 assessment:
   keywords:
-    - instagram
-    - social
-    - media
-    - marketing
-    - content
-    - creation
-    - ad
-    - copy
-    - photography
-    - visual
-    - design
-    - strategy
-    - campaign
-    - post
-    - reel
-    - story
-    - hashtag
-    - engagement
-    - branding
-    - digital
+    - "instagram"
+    - "social media"
+    - "marketing"
+    - "campaign"
+    - "ad copy"
+    - "hashtag strategy"
+    - "visual concept"
+    - "brand positioning"
+    - "engagement growth"
 
   specializations:
-    - domain: social_media_marketing
+    - domain: "social media marketing"
       confidence_boost: 0.4
-    - domain: content_creation
+    - domain: "content creation"
       confidence_boost: 0.3
-    - domain: digital_advertising
+    - domain: "digital advertising"
+      confidence_boost: 0.3
+    - domain: "brand strategy"
       confidence_boost: 0.2
-    - domain: brand_development
-      confidence_boost: 0.1
 
   anti_patterns:
-    - "image generation"
-    - "video editing"
-    - "social media posting"
-    - "analytics reporting"
+    - "generate image"
+    - "create video"
+    - "post to instagram"
+    - "run paid ads"
     - "community management"
-    - "paid advertising"
-    - "email marketing"
-    - "seo optimization"
+    - "email campaign"
+    - "seo audit"
 
   complexity_indicators:
     simple:
-      - "single product post"
-      - "basic ad copy"
-      - "standard photo concept"
-      - "minimal competitor analysis"
+      - "single post"
+      - "basic caption"
+      - "one product"
     medium:
       - "product line campaign"
-      - "multi-option content"
-      - "detailed market research"
       - "audience targeting"
+      - "competitor research"
     complex:
       - "complete brand launch"
       - "multi-platform strategy"
-      - "competitive positioning"
-      - "comprehensive visual concepts"
-      - "integrated marketing plan"
+      - "integrated marketing campaign"
