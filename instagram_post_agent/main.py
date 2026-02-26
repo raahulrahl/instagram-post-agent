@@ -611,7 +611,7 @@ async def run_image_crew(product_website: str, product_details: str, ad_copy: st
         }
 
         # Run the image crew
-        result = image_crew.kickoff(inputs=inputs)
+        result = await image_crew.kickoff_async(inputs=inputs)
         image_descriptions = str(result)
 
         # Validate the image descriptions
@@ -778,6 +778,7 @@ def main() -> None:
     print("📱 Creates Instagram ad copy and visual content for marketing campaigns")
 
     config = load_config()
+    os.environ["CREWAI_TRACING_ENABLED"] = "false"
 
     try:
         print("🚀 Starting server...")

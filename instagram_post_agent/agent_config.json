@@ -1,5 +1,5 @@
 {
-  "author": "paras25619@gmail.com",
+  "author": "paras@getbindu.com",
   "name": "instagram-post-agent",
   "description": "AI Crew for Instagram is a multi-agent AI system that collaborates to ideate, write, design, and optimize Instagram posts\u2014handling captions, hashtags, visuals, and posting strategy to maximize reach, engagement, and brand consistency. \ud83d\ude80",
   "version": "1.0.0",
@@ -43,16 +43,6 @@
       "key": "BROWSERLESS_API_KEY",
       "description": "Browserless API key for web scraping",
       "required": true
-    },
-    {
-      "key": "OPENAI_API_KEY",
-      "description": "OpenAI API key for LLM calls (alternative to OpenRouter)",
-      "required": false
-    },
-    {
-      "key": "MODEL_NAME",
-      "description": "Model name override (default: openai/gpt-4o)",
-      "required": false
     }
   ]
 }
