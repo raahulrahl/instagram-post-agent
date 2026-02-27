@@ -236,6 +236,6 @@ documentation:
     - OPENAI_API_KEY or OPENROUTER_API_KEY
     - SERPER_API_KEY
     - BROWSERLESS_API_KEY
-    
+
     Optional:
     - MODEL_NAME (default: openai/gpt-4o)
