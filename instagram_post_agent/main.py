@@ -12,12 +12,13 @@
 import argparse
 import asyncio
 import json
+import logging
 import os
 import re
 import traceback
 from pathlib import Path
 from textwrap import dedent
-from typing import Any
+from typing import Any, cast
 
 import requests
 from bindu.penguin.bindufy import bindufy
@@ -40,6 +41,7 @@ ERROR_NO_API_KEY = "No API key available"
 llm_instance: Any = None
 _initialized = False
 _init_lock = asyncio.Lock()
+_logger = logging.getLogger(__name__)
 
 
 # --- TOOL DEFINITIONS ---
@@ -313,20 +315,14 @@ def extract_marketing_parameters_with_llm(input_text: str) -> dict:
 
 def load_config() -> dict:
     """Load agent configuration from project root."""
-    possible_paths = [
-        Path(__file__).parent.parent / "agent_config.json",
-        Path(__file__).parent / "agent_config.json",
-        Path.cwd() / "agent_config.json",
-    ]
+    config_path = Path(__file__).parent / "agent_config.json"
 
-    for config_path in possible_paths:
-        if config_path.exists():
-            try:
-                with open(config_path) as f:
-                    return json.load(f)
-            except Exception as e:
-                print(f"⚠️  Error reading {config_path}: {type(e).__name__}")
-                continue
+    if config_path.exists():
+        try:
+            with open(config_path) as f:
+                return cast(dict[str, Any], json.load(f))
+        except (OSError, json.JSONDecodeError) as exc:
+            _logger.warning("Failed to load config from %s", config_path, exc_info=exc)
 
     print("⚠️  No agent_config.json found, using default configuration")
     return {

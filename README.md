@@ -33,8 +33,6 @@ The **Instagram Post Agent** transforms product websites and marketing briefs in
 - 🎯 **Audience Targeting**: Adapts content tone and style to specific demographics
 - ⚡ **Multi-Agent Collaboration**: 5 specialized AI agents work in sequence for optimal results
 
-[Postman Collection](https://raahul-1409c5b4-717533.postman.co/workspace/getbindu's-Workspace~44eb7cfe-a752-4114-8a1a-631395f07bf1/collection/50606358-08d63179-1b6c-4d68-9d56-175631495915?action=share&creator=50606358)
-
 ---
 
 ## 🚀 Quick Start
